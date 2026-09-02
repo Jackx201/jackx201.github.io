@@ -28,6 +28,52 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
+  isolation: isolate;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.8;
+  mix-blend-mode: screen;
+  will-change: transform;
+  animation: orbFloat 18s ease-in-out infinite alternate;
+  box-shadow: 0 0 80px rgba(0, 240, 255, 0.18);
+}
+
+.orb-1 {
+  width: 52rem;
+  height: 52rem;
+  top: -14rem;
+  right: -10rem;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.35) 0%, rgba(0, 240, 255, 0.17) 30%, rgba(0, 240, 255, 0.06) 52%, transparent 72%);
+}
+
+.orb-2 {
+  width: 46rem;
+  height: 46rem;
+  left: -12rem;
+  bottom: -10rem;
+  background: radial-gradient(circle, rgba(255, 0, 60, 0.30) 0%, rgba(255, 0, 60, 0.14) 30%, rgba(255, 0, 60, 0.05) 52%, transparent 72%);
+  animation-delay: 2s;
+}
+
+.orb-3 {
+  width: 34rem;
+  height: 34rem;
+  top: 22%;
+  left: 46%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.28) 0%, rgba(168, 85, 247, 0.12) 30%, rgba(168, 85, 247, 0.05) 52%, transparent 72%);
+  animation-delay: 5s;
 }
 
 /* Background Effects */
@@ -38,8 +84,19 @@ body::before {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.03), transparent 60%),
-              radial-gradient(circle at 80% 20%, rgba(255, 0, 60, 0.04), transparent 50%);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(0, 240, 255, 0.08), transparent 28%),
+    radial-gradient(circle at 72% 18%, rgba(255, 0, 60, 0.09), transparent 28%),
+    radial-gradient(circle at 24% 72%, rgba(168, 85, 247, 0.08), transparent 30%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 10, 12, 0.10), rgba(10, 10, 12, 0.35));
   z-index: -1;
   pointer-events: none;
 }
@@ -408,6 +465,18 @@ a {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes orbFloat {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(32px, -24px, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-22px, 18px, 0) scale(1.15);
   }
 }
 
